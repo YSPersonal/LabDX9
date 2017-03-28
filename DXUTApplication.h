@@ -56,6 +56,8 @@ class DXUTApplication :
 	DXUTApplication();
 public:
 
+	static int Run();
+
 	static DXUTApplication* Instance();
 	
 	void AddHandler(std::shared_ptr<DXUTEventHandler> handler);
