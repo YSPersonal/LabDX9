@@ -76,11 +76,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LabDX9.cpp" />
-    <ClCompile Include="Callbacks.cpp" />
-    <ClCompile Include="Userdata.cpp" />
+    <ClCompile Include="DXUTEventHandler.cpp" />
+    <ClCompile Include="UIFontExample.cpp" />
+    <ClCompile Include="UIControlExample.cpp" />
+    <ClCompile Include="XExample.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Userdata.h" />
+    <ClInclude Include="DXUTEventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">

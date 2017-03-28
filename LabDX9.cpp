@@ -1,10 +1,3 @@
-//--------------------------------------------------------------------------------------
-// File: LabDX9.cpp
-//
-// Empty starting point for new Direct3D 9 and/or Direct3D 11 applications
-//
-// Copyright (c) Microsoft Corporation. All rights reserved.
-//--------------------------------------------------------------------------------------
 #include "DXUT.h"
 
 
@@ -23,58 +16,18 @@ extern void CALLBACK OnD3D9LostDevice( void* pUserContext );
 extern void CALLBACK OnD3D9DestroyDevice( void* pUserContext );
 
 
-//--------------------------------------------------------------------------------------
-// Called right before creating a D3D9 or D3D11 device, allowing the app to modify the device settings as needed
-//--------------------------------------------------------------------------------------
-bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* pUserContext )
-{
-    return true;
-}
+extern bool CALLBACK ModifyDeviceSettings(DXUTDeviceSettings* pDeviceSettings, void* pUserContext);
+extern void CALLBACK OnFrameMove(double fTime, float fElapsedTime, void* pUserContext);
+extern LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
+	bool* pbNoFurtherProcessing, void* pUserContext);
+extern void CALLBACK OnKeyboard(UINT nChar, bool bKeyDown, bool bAltDown, void* pUserContext);
+extern void CALLBACK OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleButtonDown,
+	bool bSideButton1Down, bool bSideButton2Down, int nMouseWheelDelta,
+	int xPos, int yPos, void* pUserContext);
+
+extern bool CALLBACK OnDeviceRemoved(void* pUserContext);
 
 
-//--------------------------------------------------------------------------------------
-// Handle updates to the scene.  This is called regardless of which D3D API is used
-//--------------------------------------------------------------------------------------
-void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext )
-{
-}
-
-
-//--------------------------------------------------------------------------------------
-// Handle messages to the application
-//--------------------------------------------------------------------------------------
-LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
-                          bool* pbNoFurtherProcessing, void* pUserContext )
-{
-    return 0;
-}
-
-
-//--------------------------------------------------------------------------------------
-// Handle key presses
-//--------------------------------------------------------------------------------------
-void CALLBACK OnKeyboard( UINT nChar, bool bKeyDown, bool bAltDown, void* pUserContext )
-{
-}
-
-
-//--------------------------------------------------------------------------------------
-// Handle mouse button presses
-//--------------------------------------------------------------------------------------
-void CALLBACK OnMouse( bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleButtonDown,
-                       bool bSideButton1Down, bool bSideButton2Down, int nMouseWheelDelta,
-                       int xPos, int yPos, void* pUserContext )
-{
-}
-
-
-//--------------------------------------------------------------------------------------
-// Call if device was removed.  Return true to find a new device, false to quit
-//--------------------------------------------------------------------------------------
-bool CALLBACK OnDeviceRemoved( void* pUserContext )
-{
-    return true;
-}
 
 
 //--------------------------------------------------------------------------------------
@@ -106,19 +59,11 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
     DXUTSetCallbackD3D9DeviceLost( OnD3D9LostDevice );
     DXUTSetCallbackD3D9DeviceDestroyed( OnD3D9DestroyDevice );
 
-    // Set the D3D11 DXUT callbacks. Remove these sets if the app doesn't need to support D3D11
-   /* DXUTSetCallbackD3D11DeviceAcceptable( IsD3D11DeviceAcceptable );
-    DXUTSetCallbackD3D11DeviceCreated( OnD3D11CreateDevice );
-    DXUTSetCallbackD3D11SwapChainResized( OnD3D11ResizedSwapChain );
-    DXUTSetCallbackD3D11FrameRender( OnD3D11FrameRender );
-    DXUTSetCallbackD3D11SwapChainReleasing( OnD3D11ReleasingSwapChain );
-    DXUTSetCallbackD3D11DeviceDestroyed( OnD3D11DestroyDevice );*/
-
     // Perform any application-level initialization here
 
     DXUTInit( true, true, NULL ); // Parse the command line, show msgboxes on error, no extra command line params
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
-    DXUTCreateWindow( L"LabDX9" );
+    DXUTCreateWindow( L"DX9" );
 
     // Only require 10-level hardware
     DXUTCreateDevice( D3D_FEATURE_LEVEL_10_0, true, 640, 480 );

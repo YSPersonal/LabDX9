@@ -384,8 +384,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Userdata.cpp" />
-    <ClInclude Include="Userdata.h" />
+    <ClCompile Include="DXUTEventHandler.cpp" />
+    <ClCompile Include="UIControlExample.cpp" />
+    <ClCompile Include="UIFontExample.cpp" />
+    <ClCompile Include="XExample.cpp" />
+    <ClInclude Include="DXUTEventHandler.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTDevice11.h" />
@@ -412,7 +415,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LabDX9.cpp" />
-    <ClCompile Include="Callbacks.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
