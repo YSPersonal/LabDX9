@@ -127,6 +127,19 @@ class XExample : public CDXUTEventHandler {
 
 		return S_OK;
 	}
+
+	void CALLBACK OnFrameMove(double fTime, float fElapsedTime, void* pUserContext) override
+	{
+		// Update the camera's position based on user input 
+		camera.FrameMove(fElapsedTime);
+	}
+
+	virtual LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
+		bool* pbNoFurtherProcessing, void* pUserContext) override {
+		camera.HandleMessages(hWnd, uMsg, wParam, lParam);
+
+		return 0;
+	}
 };
 
 auto p = new XExample();
