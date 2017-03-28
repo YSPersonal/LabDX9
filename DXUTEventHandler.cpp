@@ -2,7 +2,7 @@
 #include "DXUTEventHandler.h"
 #include<memory>
 
-static std::unique_ptr<CDXUTEventHandler> handler = NULL;
+static std::unique_ptr<DXUTEventHandler> handler = NULL;
 
 //--------------------------------------------------------------------------------------
 // Rejects any D3D9 devices that aren't acceptable to the app by returning false
@@ -125,7 +125,7 @@ bool CALLBACK OnDeviceRemoved(void* pUserContext)
 }
 
 
-bool CDXUTEventHandler::IsD3D9DeviceAcceptable(D3DCAPS9 * pCaps, D3DFORMAT AdapterFormat, 
+bool DXUTEventHandler::IsD3D9DeviceAcceptable(D3DCAPS9 * pCaps, D3DFORMAT AdapterFormat,
 	D3DFORMAT BackBufferFormat, bool bWindowed, void * pUserContext)
 {
 	// Typically want to skip back buffer formats that don't support alpha blending
@@ -138,19 +138,19 @@ bool CDXUTEventHandler::IsD3D9DeviceAcceptable(D3DCAPS9 * pCaps, D3DFORMAT Adapt
 	return true;
 }
 
-HRESULT CDXUTEventHandler::OnD3D9CreateDevice(IDirect3DDevice9 * pd3dDevice, 
+HRESULT DXUTEventHandler::OnD3D9CreateDevice(IDirect3DDevice9 * pd3dDevice, 
 	const D3DSURFACE_DESC * pBackBufferSurfaceDesc, void * pUserContext)
 {
 	return S_OK;
 }
 
-HRESULT CDXUTEventHandler::OnD3D9ResetDevice(IDirect3DDevice9 * pd3dDevice, 
+HRESULT DXUTEventHandler::OnD3D9ResetDevice(IDirect3DDevice9 * pd3dDevice, 
 	const D3DSURFACE_DESC * pBackBufferSurfaceDesc, void * pUserContext)
 {
 	return S_OK;
 }
 
-void CDXUTEventHandler::OnD3D9FrameRender(IDirect3DDevice9 * pd3dDevice, double fTime, float fElapsedTime, 
+void DXUTEventHandler::OnD3D9FrameRender(IDirect3DDevice9 * pd3dDevice, double fTime, float fElapsedTime, 
 	void * pUserContext)
 {
 	HRESULT hr;
@@ -165,11 +165,11 @@ void CDXUTEventHandler::OnD3D9FrameRender(IDirect3DDevice9 * pd3dDevice, double 
 	}
 }
 
-void CDXUTEventHandler::OnD3D9LostDevice(void * pUserContext)
+void DXUTEventHandler::OnD3D9LostDevice(void * pUserContext)
 {
 }
 
-void CDXUTEventHandler::OnD3D9DestroyDevice(void * pUserContext)
+void DXUTEventHandler::OnD3D9DestroyDevice(void * pUserContext)
 {
 }
 
@@ -178,53 +178,53 @@ void CDXUTEventHandler::OnD3D9DestroyDevice(void * pUserContext)
 
 
 
-bool CDXUTEventHandler::ModifyDeviceSettings(DXUTDeviceSettings * pDeviceSettings, void * pUserContext)
+bool DXUTEventHandler::ModifyDeviceSettings(DXUTDeviceSettings * pDeviceSettings, void * pUserContext)
 {
 	return true;
 }
 
-void CDXUTEventHandler::OnFrameMove(double fTime, float fElapsedTime, void * pUserContext)
+void DXUTEventHandler::OnFrameMove(double fTime, float fElapsedTime, void * pUserContext)
 {
 }
 
-LRESULT CDXUTEventHandler::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, 
+LRESULT DXUTEventHandler::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, 
 	bool * pbNoFurtherProcessing, void * pUserContext)
 {
 	return 0;
 }
 
-void CDXUTEventHandler::OnKeyboard(UINT nChar, bool bKeyDown, bool bAltDown, void * pUserContext)
+void DXUTEventHandler::OnKeyboard(UINT nChar, bool bKeyDown, bool bAltDown, void * pUserContext)
 {
 }
 
-void CDXUTEventHandler::OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleButtonDown, 
+void DXUTEventHandler::OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleButtonDown, 
 	bool bSideButton1Down, bool bSideButton2Down, 
 	int nMouseWheelDelta, 
 	int xPos, int yPos, void * pUserContext)
 {
 }
 
-bool CDXUTEventHandler::OnDeviceRemoved(void * pUserContext)
+bool DXUTEventHandler::OnDeviceRemoved(void * pUserContext)
 {
 	return true;
 }
 
-void CDXUTEventHandler::Set()
+void DXUTEventHandler::Set()
 {
 	if (handler.get() != this)
 		handler.reset(this);
 }
 
-CDXUTEventHandler::CDXUTEventHandler()
+DXUTEventHandler::DXUTEventHandler()
 {
 	if (handler.get() == NULL)
 		Set();
 }
 
 
-CDXUTEventHandler::~CDXUTEventHandler()
+DXUTEventHandler::~DXUTEventHandler()
 {
 }
 
-typedef std::shared_ptr<CDXUTEventHandler> DXUTEventHandler;
+//typedef std::shared_ptr<DXUTEventHandler> DXUTEventHandler;
 

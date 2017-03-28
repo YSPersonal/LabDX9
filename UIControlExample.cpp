@@ -11,7 +11,7 @@ void CALLBACK OnGUIEvent(UINT nEvent, int nControlID, CDXUTControl* pControl, vo
 		clickCount++;
 }
 
-class UIControlExample : public CDXUTEventHandler {
+class UIControlExample : public DXUTEventHandler {
 
 	ID3DXFont* font;
 	CDXUTDialogResourceManager drManager;

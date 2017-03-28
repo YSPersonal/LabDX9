@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DXUT.h"
-class CDXUTEventHandler
+class DXUTEventHandler
 {
 public:
 
@@ -29,7 +29,7 @@ public:
 
 	void Set();
 
-	CDXUTEventHandler();
-	~CDXUTEventHandler();
+	DXUTEventHandler();
+	~DXUTEventHandler();
 };
 

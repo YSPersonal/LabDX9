@@ -36,6 +36,8 @@
     <ClCompile Include="DXUT\Optional\SDKmisc.cpp">
       <Filter>DXUT</Filter>
     </ClCompile>
+    <ClCompile Include="DXUTApplication.cpp" />
+    <ClCompile Include="TeapotHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUTEventHandler.h" />
@@ -72,6 +74,7 @@
     <ClInclude Include="DXUT\Optional\SDKmisc.h">
       <Filter>DXUT</Filter>
     </ClInclude>
+    <ClInclude Include="DXUTApplication.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

@@ -3,7 +3,7 @@
 #include "SDKmisc.h"
 #include "DXUTEventHandler.h"
 
-class UIFontExample : public CDXUTEventHandler {
+class UIFontExample : public DXUTEventHandler {
 	
 	ID3DXFont* font;
 	HRESULT CALLBACK OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice,

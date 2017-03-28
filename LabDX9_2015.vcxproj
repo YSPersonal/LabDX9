@@ -384,10 +384,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DXUTApplication.cpp" />
     <ClCompile Include="DXUTEventHandler.cpp" />
+    <ClCompile Include="TeapotHandler.cpp" />
     <ClCompile Include="UIControlExample.cpp" />
     <ClCompile Include="UIFontExample.cpp" />
     <ClCompile Include="XExample.cpp" />
+    <ClInclude Include="DXUTApplication.h" />
     <ClInclude Include="DXUTEventHandler.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />

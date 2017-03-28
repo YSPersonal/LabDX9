@@ -53,7 +53,7 @@ HRESULT LoadMesh(IDirect3DDevice9* pd3dDevice, WCHAR* strFileName, ID3DXMesh** p
 }
 
 
-class XExample : public CDXUTEventHandler {
+class XExample : public DXUTEventHandler {
 	
 	ID3DXMesh* mesh;
 	IDirect3DTexture9* texture;
@@ -142,4 +142,4 @@ class XExample : public CDXUTEventHandler {
 	}
 };
 
-auto p = new XExample();
+//auto p = new XExample();
