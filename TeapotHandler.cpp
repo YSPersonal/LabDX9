@@ -67,4 +67,7 @@ class TeapotHandler : public DXUTEventHandler {
 	}
 };
 
-auto p = new TeapotHandler();
+
+//int main() {
+//	DXUTEventHandler::Run(new TeapotHandler());
+//}

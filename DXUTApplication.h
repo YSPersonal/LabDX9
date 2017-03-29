@@ -11,6 +11,7 @@ class DXUTApplication :
 {
 
 	std::vector<std::shared_ptr<DXUTEventHandler>> handlers;
+	
 	bool CALLBACK IsD3D9DeviceAcceptable(D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat,
 		bool bWindowed, void* pUserContext) override;
 
@@ -60,10 +61,10 @@ public:
 
 	static DXUTApplication* Instance();
 	
-	void AddHandler(std::shared_ptr<DXUTEventHandler> handler);
-
-	template<class T>
-	static void AddHandler();
+	//void AddHandler(std::shared_ptr<DXUTEventHandler> handler);
+	void AddHandler(DXUTEventHandler* pHandler);
+	/*template<class T>
+	static void AddHandler();*/
 
 	~DXUTApplication();
 };

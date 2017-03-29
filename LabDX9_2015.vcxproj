@@ -151,7 +151,7 @@
     <Link>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>legacy_stdio_definitions.lib;d3dcompiler.lib;d3dx11d.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <LargeAddressAware>true</LargeAddressAware>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
@@ -387,11 +387,13 @@
     <ClCompile Include="DXUTApplication.cpp" />
     <ClCompile Include="DXUTEventHandler.cpp" />
     <ClCompile Include="TeapotHandler.cpp" />
+    <ClCompile Include="TestGeometryHandler.cpp" />
     <ClCompile Include="UIControlExample.cpp" />
     <ClCompile Include="UIFontExample.cpp" />
     <ClCompile Include="XExample.cpp" />
     <ClInclude Include="DXUTApplication.h" />
     <ClInclude Include="DXUTEventHandler.h" />
+    <ClInclude Include="TestGeometryHandler.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTDevice11.h" />

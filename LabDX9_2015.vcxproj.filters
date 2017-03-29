@@ -38,6 +38,7 @@
     </ClCompile>
     <ClCompile Include="DXUTApplication.cpp" />
     <ClCompile Include="TeapotHandler.cpp" />
+    <ClCompile Include="TestGeometryHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUTEventHandler.h" />
@@ -75,6 +76,7 @@
       <Filter>DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUTApplication.h" />
+    <ClInclude Include="TestGeometryHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

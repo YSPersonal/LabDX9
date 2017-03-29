@@ -4,7 +4,7 @@
 class DXUTEventHandler
 {
 public:
-
+	WCHAR* name;
 	virtual bool CALLBACK IsD3D9DeviceAcceptable(D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat,
 		bool bWindowed, void* pUserContext);
 	virtual HRESULT CALLBACK OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice,
@@ -27,9 +27,12 @@ public:
 
 	virtual bool CALLBACK OnDeviceRemoved(void* pUserContext);
 
-	void Set();
-
 	DXUTEventHandler();
 	~DXUTEventHandler();
+
+	static int Run(DXUTEventHandler* handler);
+protected:
+	void Set();
+
 };
 

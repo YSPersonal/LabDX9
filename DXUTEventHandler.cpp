@@ -2,7 +2,7 @@
 #include "DXUTEventHandler.h"
 #include<memory>
 
-static std::unique_ptr<DXUTEventHandler> handler = NULL;
+static std::unique_ptr<DXUTEventHandler> g_Handler = NULL;
 
 //--------------------------------------------------------------------------------------
 // Rejects any D3D9 devices that aren't acceptable to the app by returning false
@@ -10,7 +10,7 @@ static std::unique_ptr<DXUTEventHandler> handler = NULL;
 bool CALLBACK IsD3D9DeviceAcceptable(D3DCAPS9* pCaps, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat,
 	bool bWindowed, void* pUserContext)
 {
-	return handler->IsD3D9DeviceAcceptable(pCaps, AdapterFormat, BackBufferFormat, bWindowed, pUserContext);
+	return g_Handler->IsD3D9DeviceAcceptable(pCaps, AdapterFormat, BackBufferFormat, bWindowed, pUserContext);
 }
 
 
@@ -22,7 +22,7 @@ HRESULT CALLBACK OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFA
 	void* pUserContext)
 {
 
-	return handler->OnD3D9CreateDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext);
+	return g_Handler->OnD3D9CreateDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext);
 }
 
 
@@ -33,7 +33,7 @@ HRESULT CALLBACK OnD3D9CreateDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFA
 HRESULT CALLBACK OnD3D9ResetDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
 	void* pUserContext)
 {
-	return handler->OnD3D9ResetDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext);
+	return g_Handler->OnD3D9ResetDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext);
 }
 
 
@@ -43,7 +43,7 @@ HRESULT CALLBACK OnD3D9ResetDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFAC
 void CALLBACK OnD3D9FrameRender(IDirect3DDevice9* pd3dDevice, double fTime, float fElapsedTime, 
 	void* pUserContext)
 {
-	handler->OnD3D9FrameRender(pd3dDevice, fTime, fElapsedTime, pUserContext);
+	g_Handler->OnD3D9FrameRender(pd3dDevice, fTime, fElapsedTime, pUserContext);
 }
 
 
@@ -52,7 +52,7 @@ void CALLBACK OnD3D9FrameRender(IDirect3DDevice9* pd3dDevice, double fTime, floa
 //--------------------------------------------------------------------------------------
 void CALLBACK OnD3D9LostDevice(void* pUserContext)
 {
-	handler->OnD3D9LostDevice(pUserContext);
+	g_Handler->OnD3D9LostDevice(pUserContext);
 }
 
 
@@ -61,7 +61,7 @@ void CALLBACK OnD3D9LostDevice(void* pUserContext)
 //--------------------------------------------------------------------------------------
 void CALLBACK OnD3D9DestroyDevice(void* pUserContext)
 {
-	handler->OnD3D9DestroyDevice(pUserContext);
+	g_Handler->OnD3D9DestroyDevice(pUserContext);
 }
 
 
@@ -72,7 +72,7 @@ void CALLBACK OnD3D9DestroyDevice(void* pUserContext)
 //--------------------------------------------------------------------------------------
 bool CALLBACK ModifyDeviceSettings(DXUTDeviceSettings* pDeviceSettings, void* pUserContext)
 {
-	return handler->ModifyDeviceSettings(pDeviceSettings,pUserContext);
+	return g_Handler->ModifyDeviceSettings(pDeviceSettings,pUserContext);
 }
 
 
@@ -81,7 +81,7 @@ bool CALLBACK ModifyDeviceSettings(DXUTDeviceSettings* pDeviceSettings, void* pU
 //--------------------------------------------------------------------------------------
 void CALLBACK OnFrameMove(double fTime, float fElapsedTime, void* pUserContext)
 {
-	handler->OnFrameMove(fTime, fElapsedTime, pUserContext);
+	g_Handler->OnFrameMove(fTime, fElapsedTime, pUserContext);
 }
 
 
@@ -91,7 +91,7 @@ void CALLBACK OnFrameMove(double fTime, float fElapsedTime, void* pUserContext)
 LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
 	bool* pbNoFurtherProcessing, void* pUserContext)
 {
-	return handler->MsgProc(hWnd, uMsg, wParam, lParam, pbNoFurtherProcessing, pUserContext);
+	return g_Handler->MsgProc(hWnd, uMsg, wParam, lParam, pbNoFurtherProcessing, pUserContext);
 }
 
 
@@ -100,7 +100,7 @@ LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
 //--------------------------------------------------------------------------------------
 void CALLBACK OnKeyboard(UINT nChar, bool bKeyDown, bool bAltDown, void* pUserContext)
 {
-	handler->OnKeyboard(nChar, bKeyDown, bAltDown, pUserContext);
+	g_Handler->OnKeyboard(nChar, bKeyDown, bAltDown, pUserContext);
 }
 
 
@@ -111,7 +111,7 @@ void CALLBACK OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleB
 	bool bSideButton1Down, bool bSideButton2Down, int nMouseWheelDelta,
 	int xPos, int yPos, void* pUserContext)
 {
-	handler->OnMouse(bLeftButtonDown, bRightButtonDown, bMiddleButtonDown, bSideButton1Down,
+	g_Handler->OnMouse(bLeftButtonDown, bRightButtonDown, bMiddleButtonDown, bSideButton1Down,
 		bSideButton2Down, nMouseWheelDelta, xPos, yPos, pUserContext);
 }
 
@@ -121,7 +121,7 @@ void CALLBACK OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleB
 //--------------------------------------------------------------------------------------
 bool CALLBACK OnDeviceRemoved(void* pUserContext)
 {
-	return handler->OnDeviceRemoved(pUserContext);
+	return g_Handler->OnDeviceRemoved(pUserContext);
 }
 
 
@@ -129,11 +129,11 @@ bool DXUTEventHandler::IsD3D9DeviceAcceptable(D3DCAPS9 * pCaps, D3DFORMAT Adapte
 	D3DFORMAT BackBufferFormat, bool bWindowed, void * pUserContext)
 {
 	// Typically want to skip back buffer formats that don't support alpha blending
-	IDirect3D9* pD3D = DXUTGetD3D9Object();
+	/*IDirect3D9* pD3D = DXUTGetD3D9Object();
 	if (FAILED(pD3D->CheckDeviceFormat(pCaps->AdapterOrdinal, pCaps->DeviceType,
 		AdapterFormat, D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING,
 		D3DRTYPE_TEXTURE, BackBufferFormat)))
-		return false;
+		return false;*/
 
 	return true;
 }
@@ -153,16 +153,16 @@ HRESULT DXUTEventHandler::OnD3D9ResetDevice(IDirect3DDevice9 * pd3dDevice,
 void DXUTEventHandler::OnD3D9FrameRender(IDirect3DDevice9 * pd3dDevice, double fTime, float fElapsedTime, 
 	void * pUserContext)
 {
-	HRESULT hr;
+	//HRESULT hr;
 
-	// Clear the render target and the zbuffer 
-	V(pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, 45, 50, 170), 1.0f, 0));
+	//// Clear the render target and the zbuffer 
+	//V(pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, 45, 50, 170), 1.0f, 0));
 
-	// Render the scene
-	if (SUCCEEDED(pd3dDevice->BeginScene()))
-	{
-		V(pd3dDevice->EndScene());
-	}
+	//// Render the scene
+	//if (SUCCEEDED(pd3dDevice->BeginScene()))
+	//{
+	//	V(pd3dDevice->EndScene());
+	//}
 }
 
 void DXUTEventHandler::OnD3D9LostDevice(void * pUserContext)
@@ -172,10 +172,6 @@ void DXUTEventHandler::OnD3D9LostDevice(void * pUserContext)
 void DXUTEventHandler::OnD3D9DestroyDevice(void * pUserContext)
 {
 }
-
-
-
-
 
 
 bool DXUTEventHandler::ModifyDeviceSettings(DXUTDeviceSettings * pDeviceSettings, void * pUserContext)
@@ -211,19 +207,60 @@ bool DXUTEventHandler::OnDeviceRemoved(void * pUserContext)
 
 void DXUTEventHandler::Set()
 {
-	if (handler.get() != this)
-		handler.reset(this);
+	if (g_Handler.get() != this)
+		g_Handler.reset(this);
 }
 
 DXUTEventHandler::DXUTEventHandler()
-{
-	if (handler.get() == NULL)
-		Set();
+{	
 }
 
 
 DXUTEventHandler::~DXUTEventHandler()
 {
+}
+
+int DXUTEventHandler::Run(DXUTEventHandler * handler)
+{
+	handler->Set();
+
+	// Enable run-time memory check for debug builds.
+#if defined(DEBUG) | defined(_DEBUG)
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
+
+	// DXUT will create and use the best device (either D3D9 or D3D11) 
+	// that is available on the system depending on which D3D callbacks are set below
+
+	// Set general DXUT callbacks
+	DXUTSetCallbackFrameMove(::OnFrameMove);
+	DXUTSetCallbackKeyboard(::OnKeyboard);
+	DXUTSetCallbackMouse(::OnMouse);
+	DXUTSetCallbackMsgProc(::MsgProc);
+	DXUTSetCallbackDeviceChanging(::ModifyDeviceSettings);
+	DXUTSetCallbackDeviceRemoved(::OnDeviceRemoved);
+
+	// Set the D3D9 DXUT callbacks. Remove these sets if the app doesn't need to support D3D9
+	DXUTSetCallbackD3D9DeviceAcceptable(::IsD3D9DeviceAcceptable);
+	DXUTSetCallbackD3D9DeviceCreated(::OnD3D9CreateDevice);
+	DXUTSetCallbackD3D9DeviceReset(::OnD3D9ResetDevice);
+	DXUTSetCallbackD3D9FrameRender(::OnD3D9FrameRender);
+	DXUTSetCallbackD3D9DeviceLost(::OnD3D9LostDevice);
+	DXUTSetCallbackD3D9DeviceDestroyed(::OnD3D9DestroyDevice);
+
+	// Perform any application-level initialization here
+
+	DXUTInit(true, true, NULL); // Parse the command line, show msgboxes on error, no extra command line params
+	DXUTSetCursorSettings(true, true); // Show the cursor and clip it when in full screen
+	DXUTCreateWindow(L"DX9");
+
+	// Only require 10-level hardware
+	DXUTCreateDevice(D3D_FEATURE_LEVEL_10_0, true, 640, 480);
+	DXUTMainLoop(); // Enter into the DXUT ren  der loop
+
+					// Perform any application-level cleanup here
+
+	return DXUTGetExitCode();
 }
 
 //typedef std::shared_ptr<DXUTEventHandler> DXUTEventHandler;
