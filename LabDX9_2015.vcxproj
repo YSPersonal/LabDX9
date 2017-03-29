@@ -386,6 +386,7 @@
   <ItemGroup>
     <ClCompile Include="DXUTApplication.cpp" />
     <ClCompile Include="DXUTEventHandler.cpp" />
+    <ClCompile Include="SurroundCameraHandler.cpp" />
     <ClCompile Include="TeapotHandler.cpp" />
     <ClCompile Include="TestGeometryHandler.cpp" />
     <ClCompile Include="UIControlExample.cpp" />
@@ -393,6 +394,7 @@
     <ClCompile Include="XExample.cpp" />
     <ClInclude Include="DXUTApplication.h" />
     <ClInclude Include="DXUTEventHandler.h" />
+    <ClInclude Include="SurroundCameraHandler.h" />
     <ClInclude Include="TestGeometryHandler.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />

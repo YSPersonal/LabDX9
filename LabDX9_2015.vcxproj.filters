@@ -39,6 +39,7 @@
     <ClCompile Include="DXUTApplication.cpp" />
     <ClCompile Include="TeapotHandler.cpp" />
     <ClCompile Include="TestGeometryHandler.cpp" />
+    <ClCompile Include="SurroundCameraHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUTEventHandler.h" />
@@ -77,6 +78,7 @@
     </ClInclude>
     <ClInclude Include="DXUTApplication.h" />
     <ClInclude Include="TestGeometryHandler.h" />
+    <ClInclude Include="SurroundCameraHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

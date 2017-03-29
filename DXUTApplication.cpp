@@ -73,35 +73,22 @@ int DXUTApplication::Run()
 					// Perform any application-level cleanup here
 
 
-	/*for (auto i = Instance()->pHandlers.begin();
-		i != Instance()->pHandlers.end();
-		i++) {
-		(*i)->OnD3D9DestroyDevice(NULL);
-	}
-	
-	Instance()->pHandlers.clear();*/
 
 	Instance()->OnD3D9DestroyDevice(Instance());
 	Instance()->handlers.clear();
 
 	return DXUTGetExitCode();
 
-	/*int exitCode= DXUTGetExitCode();
-	Instance()->pHandlers.clear();
-	return exitCode;*/
-	
+
+
 }
 
 DXUTApplication * DXUTApplication::Instance()
 {
-	static DXUTApplication* theApp=new DXUTApplication;
+	static DXUTApplication* theApp = new DXUTApplication;
 	return theApp;
 }
 
-//void DXUTApplication::AddHandler(std::shared_ptr<DXUTEventHandler> handler)
-//{
-//	this->handlers.push_back(handler);
-//}
 
 void DXUTApplication::AddHandler(DXUTEventHandler * pHandler)
 {
@@ -109,13 +96,6 @@ void DXUTApplication::AddHandler(DXUTEventHandler * pHandler)
 	this->handlers.push_back(std::shared_ptr<DXUTEventHandler>(pHandler));
 }
 
-//template<class T>
-//void DXUTApplication::AddHandler() {
-//	DXUTEventHandler* p = new T;
-//	std::shared_ptr<DXUTEventHandler> ptr(p);
-//
-//	Instance()->AddHandler(ptr);
-//}
 
 #define I(stat) for(i=handlers.start();i!=handlers.end();i++){stat}
 
@@ -142,14 +122,10 @@ HRESULT DXUTApplication::OnD3D9CreateDevice(IDirect3DDevice9 * pd3dDevice, const
 {
 	HRESULT hr;
 
-
 	for (auto i = handlers.begin(); i != handlers.end(); i++) {
 		auto p = i->get();
 		V(p->OnD3D9CreateDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext));
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		V((*i)->OnD3D9CreateDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext));*/
 
 	return S_OK;
 }
@@ -163,9 +139,6 @@ HRESULT DXUTApplication::OnD3D9ResetDevice(IDirect3DDevice9 * pd3dDevice, const 
 		V(p->OnD3D9ResetDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext));
 	}
 
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		V((*i)->OnD3D9ResetDevice(pd3dDevice, pBackBufferSurfaceDesc, pUserContext));*/
-
 	return S_OK;
 }
 
@@ -175,10 +148,6 @@ void DXUTApplication::OnD3D9FrameRender(IDirect3DDevice9 * pd3dDevice, double fT
 		auto p = i->get();
 		p->OnD3D9FrameRender(pd3dDevice, fTime, fElapsedTime, pUserContext);
 	}
-
-
-	//for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-	//	(*i)->OnD3D9FrameRender(pd3dDevice, fTime, fElapsedTime, pUserContext);
 }
 
 void DXUTApplication::OnD3D9LostDevice(void * pUserContext)
@@ -187,9 +156,6 @@ void DXUTApplication::OnD3D9LostDevice(void * pUserContext)
 		auto p = i->get();
 		p->OnD3D9LostDevice(pUserContext);
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		(*i)->OnD3D9LostDevice(pUserContext);*/
 }
 
 void DXUTApplication::OnD3D9DestroyDevice(void * pUserContext)
@@ -198,9 +164,6 @@ void DXUTApplication::OnD3D9DestroyDevice(void * pUserContext)
 		auto p = i->get();
 		p->OnD3D9DestroyDevice(pUserContext);
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		(*i)->OnD3D9DestroyDevice(pUserContext);*/
 }
 
 bool DXUTApplication::ModifyDeviceSettings(DXUTDeviceSettings * pDeviceSettings, void * pUserContext)
@@ -211,13 +174,6 @@ bool DXUTApplication::ModifyDeviceSettings(DXUTDeviceSettings * pDeviceSettings,
 		{
 		}
 	}
-
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++) {
-		if (!(*i)->ModifyDeviceSettings(pDeviceSettings, pUserContext))
-		{
-		}
-	}*/
 	return true;
 }
 
@@ -227,9 +183,6 @@ void DXUTApplication::OnFrameMove(double fTime, float fElapsedTime, void * pUser
 		auto p = i->get();
 		p->OnFrameMove(fTime, fElapsedTime, pUserContext);
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		(*i)->OnFrameMove(fTime, fElapsedTime, pUserContext);*/
 }
 
 LRESULT DXUTApplication::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool * pbNoFurtherProcessing, void * pUserContext)
@@ -238,11 +191,6 @@ LRESULT DXUTApplication::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 		auto p = i->get();
 		p->MsgProc(hWnd, uMsg, wParam, lParam, pbNoFurtherProcessing, pUserContext);
 	}
-
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		(*i)->MsgProc(hWnd, uMsg, wParam, lParam, pbNoFurtherProcessing, pUserContext);*/
-
 	return 0;
 }
 
@@ -252,9 +200,6 @@ void DXUTApplication::OnKeyboard(UINT nChar, bool bKeyDown, bool bAltDown, void 
 		auto p = i->get();
 		p->OnKeyboard(nChar, bKeyDown, bAltDown, pUserContext);
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		(*i)->OnKeyboard(nChar, bKeyDown, bAltDown, pUserContext);*/
 }
 
 void DXUTApplication::OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleButtonDown,
@@ -265,11 +210,6 @@ void DXUTApplication::OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool 
 		p->OnMouse(bLeftButtonDown, bRightButtonDown, bMiddleButtonDown, bSideButton1Down,
 			bSideButton2Down, nMouseWheelDelta, xPos, yPos, pUserContext);
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++)
-		(*i)->OnMouse(bLeftButtonDown, bRightButtonDown, bMiddleButtonDown, bSideButton1Down,
-			bSideButton2Down, nMouseWheelDelta, xPos, yPos, pUserContext);*/
-
 }
 
 bool DXUTApplication::OnDeviceRemoved(void * pUserContext)
@@ -281,12 +221,5 @@ bool DXUTApplication::OnDeviceRemoved(void * pUserContext)
 		if (!p->OnDeviceRemoved(pUserContext))
 			r = false;
 	}
-
-	/*for (auto i = pHandlers.begin(); i != pHandlers.end(); i++) {
-		if (!(*i)->OnDeviceRemoved(pUserContext))
-			r = false;
-	}*/
-
-	//return true;
 	return r;
 }
