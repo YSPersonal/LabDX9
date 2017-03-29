@@ -7,8 +7,7 @@ HRESULT CALLBACK TestGeometryHandler::OnD3D9CreateDevice(IDirect3DDevice9* pd3dD
 
 	HRESULT hr;
 
-	D3DXCreateTeapot(pd3dDevice, &mesh, NULL);
-	
+	D3DXCreateTeapot(pd3dDevice, &mesh, NULL);	
 	return S_OK;
 }
 
@@ -47,14 +46,14 @@ TestGeometryHandler::~TestGeometryHandler()
 {
 }
 
-#include "DXUTApplication.h"
-#include "SurroundCameraHandler.h"
-
-int main() {
-	
-	DXUTApplication::Instance()->AddHandler(new SurroundCameraHandler);
-	DXUTApplication::Instance()->AddHandler(new TestGeometryHandler);
-	DXUTApplication::Run();
-
-	return 0;
-}
+//#include "DXUTApplication.h"
+//#include "SurroundCameraHandler.h"
+//
+//int main() {
+//	
+//	DXUTApplication::Instance()->AddHandler(new SurroundCameraHandler);
+//	DXUTApplication::Instance()->AddHandler(new TestGeometryHandler);
+//	DXUTApplication::Run();
+//
+//	return 0;
+//}

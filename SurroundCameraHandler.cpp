@@ -12,6 +12,10 @@ void SurroundCameraHandler::OnD3D9FrameRender(IDirect3DDevice9 * pd3dDevice, dou
 	eye.z = distance*cos(angleDirection)*cos(anglePitch);
 	eye.y = distance*sin(anglePitch);
 
+	up.x = -sin(angleDirection)*sin(anglePitch);
+	up.z = -cos(angleDirection)*sin(anglePitch);
+	up.y = cos(anglePitch);
+
 	D3DXMatrixLookAtLH(&matView, &eye, &lookat, &up);
 	pd3dDevice->SetTransform(D3DTS_VIEW, &matView);
 }
@@ -51,6 +55,11 @@ LRESULT SurroundCameraHandler::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		this->angleDirection += dx*sensitive;
 		this->anglePitch += dy*sensitive;
 
+		if (this->anglePitch > D3DX_PI / 2)
+			this->anglePitch = D3DX_PI / 2;
+
+		if (this->anglePitch <- D3DX_PI / 2)
+			this->anglePitch = -D3DX_PI / 2;
 	}
 	return 0;
 }
